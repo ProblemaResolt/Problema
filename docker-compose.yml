@@ -20,12 +20,11 @@ services:
       - db
 
   web:
-    build: ./
-    container_name: 'web_app'
-    working_dir: /opt/app/web
-    command: elm reactor
+    build: ./elm
+    container_name: 'elm_app'
+    working_dir: /opt/app/elm
     volumes:
-      - ./web:/opt/app/web
+      - ./elm:/opt/app/elm
     ports:
       - '8000:8000'
     tty: true
@@ -42,19 +41,4 @@ services:
       - "5432:5432"
     volumes:
       - app.db.volume:/var/lib/postgresql/data
-    restart: always
-
-  pgadmin4:
-    image: dpage/pgadmin4:4.2
-    container_name: pgadmin4
-    ports:
-        - 8080:80
-    volumes:
-        - ./docker/pgadmin4:/var/lib/pgadmin
-    environment:
-      - MIX_ENV=dev
-      - PORT=8080
-    hostname: pgadmin4
-    depends_on:
-        - db
     restart: always
