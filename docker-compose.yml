@@ -19,7 +19,7 @@ services:
     depends_on:
       - db
 
-  web:
+  front:
     build: ./elm
     container_name: 'elm_app'
     working_dir: /opt/app/elm
