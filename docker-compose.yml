@@ -21,7 +21,7 @@ services:
 
   front:
     build: ./elm
-    container_name: 'elm_app'
+    container_name: elm.app
     working_dir: /opt/app/elm
     volumes:
       - ./elm:/opt/app/elm
