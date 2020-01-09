@@ -6,16 +6,15 @@ volumes:
 
 services:
   api:
-    build: .
+    build: /Docker/Elixir
     container_name: app.web
     ports:
       - "4000:4000"
-    command: mix phx.server
     environment:
       - MIX_ENV=dev
       - PORT=4000
     volumes:
-      - .:/opt/app
+      - app.api.volume:/opt/app/api
     depends_on:
       - db
   web:
@@ -32,12 +31,11 @@ services:
     depends_on:
       - api
   app:
-    build: ./
+    build: ./Docker/Elm
     container_name: web.app
-    working_dir: /opt/app/src
-    command: elm reactor
+    working_dir: /opt/app/asset
     volumes:
-      - ./src:/opt/app/src
+      - app.asset.volume:/opt/app/asset
     ports:
       - '8000:8000'
     tty: true
