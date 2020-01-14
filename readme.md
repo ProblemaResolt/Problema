@@ -14,7 +14,7 @@ option などは公式を参考にしてください。
 
 https://hexdocs.pm/phoenix/Mix.Tasks.Phx.New.html#content
 
-`mix phx.new . --option `
+`mix phx.new api --option `
 Local は以下のフォルダが生成されます。
 /app.api.volume/
 
@@ -45,13 +45,12 @@ config/mix.exs内へ追加
 \config\dev.exs の書き換え
 ```
 [中略]
-# Configure your database
-config :api, App.Repo,
-  adapter: Ecto.Adapters.PostgreSQL,
+config :api, Api.Repo,
+  adapter: Ecto.Adapters.Postgres,
   username: "postgres",
   password: "postgres",
   database: "api_dev",
-  hostname: "db",
+  hostname: "postgres",
   pool_size: 10
 [中略]
 ```
