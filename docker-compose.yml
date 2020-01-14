@@ -6,17 +6,18 @@ volumes:
 
 services:
   api:
-    build: /Docker/Elixir
+    build: Docker/Elixir
     container_name: app.web
     ports:
-      - "4000:4000"
+      - '4000:4000'
     environment:
       - MIX_ENV=dev
       - PORT=4000
     volumes:
-      - app.api.volume:/opt/app/api
+      - ./app.api.volume:/opt/app/api
     depends_on:
       - db
+    tty: true
   web:
     image: nginx:1.17-alpine
     container_name: web.server
@@ -25,19 +26,21 @@ services:
     volumes:
       - .:/opt/app
       - ./logs:/var/log/nginx
-      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf
     environment:
       - TZ=${TZ}
+    tty: true
     depends_on:
       - api
   app:
     build: ./Docker/Elm
     container_name: web.app
-    working_dir: /opt/app/asset
     volumes:
-      - app.asset.volume:/opt/app/asset
+      - ./app.web.volume:/opt/app/assets
     ports:
       - '8000:8000'
+    depends_on:
+      - api
     tty: true
 
   db:
@@ -49,7 +52,7 @@ services:
     hostname: postgres
     user: root
     ports:
-      - "5432:5432"
+      - '5432:5432'
     volumes:
-      - app.db.volume:/var/lib/postgresql/data
+      - ./app.db.volume:/var/lib/postgresql/data
     restart: always
