@@ -1,5 +1,5 @@
 FROM node:latest
-
+RUN mkdir -p /opt/app
 RUN npm init -y
 
 # dev-dependencies
@@ -16,3 +16,4 @@ RUN yarn global add elm-analyse@0.16.4
 ENV ELM_DEBUGGER=true
 
 CMD [ "elm reactor" ]
+WORKDIR /opt/app
