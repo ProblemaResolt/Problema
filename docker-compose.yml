@@ -1,4 +1,3 @@
-
 version: '3.4'
 
 volumes:
@@ -7,7 +6,7 @@ volumes:
 
 services:
   api:
-    build: Docker/Elixir
+    build: ./Docker/Elixir
     container_name: api.app
     ports:
       - 4000:4000
@@ -27,7 +26,6 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_HOST=db
-
     volumes:
       - app.db.volume:/var/lib/postgresql/data
 
@@ -46,11 +44,11 @@ services:
     depends_on:
       - api
 
-  disp:
+  assets:
     build: ./Docker/Elm
-    container_name: disp.app
+    container_name: assets.app
     volumes:
-      - ./disp:/opt/app/assets
+      - ./assets:/opt/app/assets
     ports:
       - 8000:8000
     depends_on:
