@@ -1,26 +1,38 @@
 version: '3.4'
 
 volumes:
-  db:
+  app.db.volume:
     name: app.db.volume
 
 services:
   api:
-    build: Docker/Elixir
-    container_name: web.api
+    build: ./Docker/Elixir
+    container_name: api.app
     ports:
-      - '4000:4000'
+      - 4000:4000
+    command: mix phx.server
     environment:
       - MIX_ENV=dev
       - PORT=4000
     volumes:
+      - .:/opt/app
       - ./api:/opt/app/api
     depends_on:
       - db
-    tty: true
-  web:
+
+  db:
+    image: postgres
+    container_name: db.app
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_HOST=db
+    volumes:
+      - app.db.volume:/var/lib/postgresql/data
+
+  server:
     image: nginx:1.17-alpine
-    container_name: web.server
+    container_name: server.app
     ports:
       - 10080:80
     volumes:
@@ -32,28 +44,15 @@ services:
     tty: true
     depends_on:
       - api
-  app:
+
+  assets:
     build: ./Docker/Elm
-    container_name: web.app
+    container_name: assets.app
     volumes:
-      - ./web:/opt/app/assets
+      - .:/opt/app
+      - ./assets:/opt/app/assets
     ports:
-      - '8000:8000'
+      - 8000:8000
     depends_on:
       - api
     tty: true
-
-  db:
-    image: postgres
-    container_name: web.db
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-    hostname: postgres
-    user: root
-    ports:
-      - '15432:5432'
-    volumes:
-      - ./db:/var/lib/postgresql/data
-    tty: true
-    restart: always
