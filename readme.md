@@ -16,7 +16,7 @@ https://hexdocs.pm/phoenix/Mix.Tasks.Phx.New.html#content
 
 `mix phx.new api --option `
 Local は以下のフォルダが生成されます。
-/app.api.volume/
+/api/
 
 ### ライブラリインストール
 `mix deps.get`
