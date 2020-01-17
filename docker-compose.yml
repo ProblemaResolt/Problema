@@ -10,14 +10,15 @@ services:
     container_name: api.app
     ports:
       - 4000:4000
-    command: mix phx.server
     environment:
       - MIX_ENV=dev
       - PORT=4000
     volumes:
-      - ./:/opt/app/
+      - .:/opt/app
+      - ./api:/opt/app/api
     depends_on:
       - db
+    tty: true
 
   db:
     image: postgres
@@ -26,6 +27,8 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_HOST=db
+    ports:
+      - 5432:5432
     volumes:
       - app.db.volume:/var/lib/postgresql/data
 
@@ -48,6 +51,7 @@ services:
     build: ./Docker/Elm
     container_name: assets.app
     volumes:
+      - .:/opt/app
       - ./assets:/opt/app/assets
     ports:
       - 8000:8000
