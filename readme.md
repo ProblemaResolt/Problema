@@ -1,7 +1,7 @@
 # Docker Phoenix 開発環境構築
-バックエンドはElixir Phoenix 
-フロントエンドはElm
-WebサーバはNginxで生成されます。
+- バックエンドはElixir Phoenix 
+- フロントエンドはElm
+- WebサーバはNginxで生成されます。
 ## Docker Build
  `docker-compose -f "docker-compose.yml" up -d --build`
 
@@ -15,8 +15,9 @@ option などは公式を参考にしてください。
 https://hexdocs.pm/phoenix/Mix.Tasks.Phx.New.html#content
 
 `mix phx.new api --option `
-Local は以下のフォルダが生成されます。
-/api/
+ Local は以下のフォルダが生成されます。
+
+ /api/
 
 ### ライブラリインストール
 `mix deps.get`
@@ -58,10 +59,14 @@ DB情報を更新
 
 ## Elm 構築
 
-`docker-compose exec app sh`
-/opt/app/assets # elm reactor
+`docker-compose exec assets sh`
+
+`/opt/app/assets # elm reactor`
+
 すると
+
 Go to http://localhost:8000 to see your project dashboard.
+
 ダッシュボードが http://localhost:8000 に表示されます。
 
 
