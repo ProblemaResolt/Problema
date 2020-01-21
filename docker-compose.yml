@@ -1,4 +1,4 @@
-version: '3.4'
+version: '3.7'
 
 volumes:
   app.db.volume:
@@ -20,17 +20,17 @@ services:
       - db
     tty: true
 
-  db:
-    image: postgres
-    container_name: db.app
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_HOST=db
-    ports:
-      - 5432:5432
+  assets:
+    build: ./Docker/Elm
+    container_name: assets.app
     volumes:
-      - app.db.volume:/var/lib/postgresql/data
+      - .:/opt/app
+      - ./assets:/opt/app/assets
+    ports:
+      - 8000:8000
+    depends_on:
+      - api
+    tty: true
 
   server:
     image: nginx:1.17-alpine
@@ -47,14 +47,21 @@ services:
     depends_on:
       - api
 
-  assets:
-    build: ./Docker/Elm
-    container_name: assets.app
-    volumes:
-      - .:/opt/app
-      - ./assets:/opt/app/assets
+  db:
+    image: postgres
+    container_name: db.app
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_HOST=db
     ports:
-      - 8000:8000
-    depends_on:
-      - api
-    tty: true
+      - 5432:5432
+    volumes:
+      - app.db.volume:/var/lib/postgresql/data
+
+  redis:
+    image: "redis:latest"
+    ports:
+      - "6380:6379"
+    volumes:
+      - "./redis:/redis"
