@@ -15,12 +15,14 @@ option などは公式を参考にしてください。
 https://hexdocs.pm/phoenix/Mix.Tasks.Phx.New.html#content
 
 `mix phx.new api --option `
+
  Local は以下のフォルダが生成されます。
 
  /api/
 
 ### ライブラリインストール
 `mix deps.get`
+
 dapter の{:plug_cowboy, "~> 1.0"},を追加　
 
 config/mix.exs内へ追加
@@ -52,6 +54,7 @@ config :api, Api.Repo,
 
 ### DB Migrate
 DB情報を更新
+
 `mix ecto.create`
 
 ### Env 設定
