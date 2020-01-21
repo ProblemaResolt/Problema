@@ -2,6 +2,9 @@
 - バックエンドはElixir Phoenix 
 - フロントエンドはElm
 - WebサーバはNginxで生成されます。
+
+ものすごくざっくり説明なのでご容赦を
+
 ## Docker Build
  `docker-compose -f "docker-compose.yml" up -d --build`
 
@@ -19,6 +22,8 @@ https://hexdocs.pm/phoenix/Mix.Tasks.Phx.New.html#content
  Local は以下のフォルダが生成されます。
 
  /api/
+
+ 色々聞かれるのですが基本Yesで大丈夫です。
 
 ### ライブラリインストール
 `mix deps.get`
@@ -40,6 +45,7 @@ config/mix.exs内へ追加
 ```
 ### DevDB 接続
 \config\dev.exs の書き換え
+
 ```
 [中略]
 config :api, Api.Repo,
@@ -47,7 +53,7 @@ config :api, Api.Repo,
   username: "postgres",
   password: "postgres",
   database: "api_dev",
-  hostname: "postgres",
+  hostname: "db",
   pool_size: 10
 [中略]
 ```
@@ -57,21 +63,43 @@ DB情報を更新
 
 `mix ecto.create`
 
+### Phoenix 起動
+Phoenix server を起動します。
+`mix phx.server`
+
+※ docker-compose.yml command に仕込んでおけば `dockr-compose up -d` の際に起動してくれるようになります。
+
 ### Env 設定
 ちょっとまって...
 
 ## Elm 構築
-
 `docker-compose exec assets sh`
 
-`/opt/app/assets # elm reactor`
+elm project 作成します　聞かれたらYで応答してあげてください。
 
-すると
+```
+/opt/app/assets #　elm init
+Hello! Elm projects always start with an elm.json file. I can create them!
 
-Go to http://localhost:8000 to see your project dashboard.
+Now you may be wondering, what will be in this file? How do I add Elm files to
+my project? How do I see it in the browser? How will my code grow? Do I need
+more directories? What about tests? Etc.
 
-ダッシュボードが http://localhost:8000 に表示されます。
+Check out <https://elm-lang.org/0.19.1/init> for all the answers!
 
+Knowing all that, would you like me to create an elm.json file now? [Y/n]: y
+Okay, I created it. Now read that link!
+```
+
+
+```
+/opt/app/assets # elm reactor
+Go to <http://localhost:8000> to see your project dashboard.
+```
+
+するとブラウザに表示されます！
+
+/assets/src に elm file を作成して設置すると表示してくれます。
 
 # 参考資料
 API
@@ -88,6 +116,17 @@ API
     PhoenixでRedisを使った簡単ランキングの実装
     https://qiita.com/koyo-miyamura/items/b5c123fa40685b9f8073#ランキングロジックを作る
 
-
- - Elm 公式
+Assets
+- Elm 公式
    https://guide.elm-lang.jp/
+
+
+# Docker 関連
+  - docker-compose コマンド概要
+    http://docs.docker.jp/compose/reference/overview.html
+
+  - コマンド一覧（Docker Compose編）
+    https://www.wakuwakubank.com/posts/354-docker-command-compose/
+
+  - Compose ファイル・リファレンス
+    http://docs.docker.jp/compose/compose-file.html
