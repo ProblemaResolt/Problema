@@ -7,7 +7,7 @@ volumes:
 services:
   api:
     build: ./Docker/Elixir
-    container_name: api.app
+    container_name: web.app
     ports:
       - 4000:4000
     environment:
@@ -15,7 +15,7 @@ services:
       - PORT=4000
     volumes:
       - .:/opt/app
-      - ./api:/opt/app/api
+      - ./api:/opt/app/web
     depends_on:
       - db
     tty: true
@@ -53,7 +53,7 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-      - POSTGRES_HOST=db
+      - POSTGRES_HOST=localhost
     ports:
       - 5432:5432
     volumes:
