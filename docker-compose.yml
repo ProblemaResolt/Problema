@@ -52,9 +52,9 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-      - POSTGRES_HOST=localhost
+      - POSTGRES_HOST=db
     ports:
-      - 5432:5432
+      - 54321:5432
     volumes:
       - app.db.volume:/var/lib/postgresql/data
 

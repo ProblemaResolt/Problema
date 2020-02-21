@@ -17,11 +17,11 @@ option などは公式を参考にしてください。
 
 https://hexdocs.pm/phoenix/Mix.Tasks.Phx.New.html#content
 
-`mix phx.new api --option `
+`mix phx.new web --option `
 
  Local は以下のフォルダが生成されます。
 
- /api/
+ /web/
 
  色々聞かれるのですが基本Yesで大丈夫です。
 
@@ -52,8 +52,9 @@ config :api, Api.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "postgres",
   password: "postgres",
-  database: "api_dev",
-  hostname: "db",
+  database: "web_dev",
+  hostname: "db
+  ",
   pool_size: 10
 [中略]
 ```
