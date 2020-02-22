@@ -14,6 +14,7 @@ services:
       - MIX_ENV=dev
       - PORT=4000
     volumes:
+      - .:/opt/app
       - ./web:/opt/app/web
     depends_on:
       - db
