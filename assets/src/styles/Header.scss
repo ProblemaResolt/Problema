@@ -1,0 +1,10 @@
+@import "./colors.scss";
+
+.title {
+  box-sizing: border-box;
+  padding: 0 2rem;
+  text-align: left;
+  &__text {
+    font-size: 1.2em;
+  }
+}
