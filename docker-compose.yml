@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3.4'
 
 volumes:
   app.db.volume:
@@ -7,18 +7,31 @@ volumes:
 services:
   api:
     build: ./Docker/Elixir
-    container_name: web.app
+    container_name: api.app
     ports:
       - 4000:4000
-      - 8000:8000
     environment:
       - MIX_ENV=dev
       - PORT=4000
+      - APP_API_ENDPOINT: http://localhost:4000
     volumes:
       - .:/opt/app
+      - ./api:/opt/app/api
     depends_on:
       - db
     tty: true
+
+  db:
+    image: postgres
+    container_name: db.app
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_HOST=db
+    ports:
+      - 5432:5432
+    volumes:
+      - app.db.volume:/var/lib/postgresql/data
 
   server:
     image: nginx:1.17-alpine
@@ -35,22 +48,14 @@ services:
     depends_on:
       - api
 
-  db:
-    image: postgres
-    container_name: db.app
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_HOST=db
-    ports:
-      - 54321:5432
+  assets:
+    build: ./Docker/Elm
+    container_name: assets.app
     volumes:
-      - app.db.volume:/var/lib/postgresql/data
-
-  redis:
-    image: redis:latest
-    container_name: redis.app
+      - .:/opt/app
+      - ./assets:/opt/app/assets
     ports:
-      - 6380:6379
-    volumes:
-      - ./redis:/redis
+      - 8000:8000
+    depends_on:
+      - api
+    tty: true

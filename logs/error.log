@@ -1,6 +1,0 @@
-2020/05/19 07:04:33 [error] 7#7: *2 directory index of "/opt/app/assets/" is forbidden, client: 172.18.0.1, server: , request: "GET / HTTP/1.1", host: "localhost:10080"
-2020/05/19 07:04:34 [error] 7#7: *2 open() "/opt/app/assets/favicon.ico" failed (2: No such file or directory), client: 172.18.0.1, server: , request: "GET /favicon.ico HTTP/1.1", host: "localhost:10080", referrer: "http://localhost:10080/"
-2020/05/21 05:33:30 [error] 8#8: *4 directory index of "/opt/app/assets/" is forbidden, client: 172.18.0.1, server: , request: "GET / HTTP/1.1", host: "localhost:10080"
-2020/05/21 05:33:30 [error] 8#8: *4 open() "/opt/app/assets/favicon.ico" failed (2: No such file or directory), client: 172.18.0.1, server: , request: "GET /favicon.ico HTTP/1.1", host: "localhost:10080", referrer: "http://localhost:10080/"
-2020/05/21 05:33:33 [error] 8#8: *4 directory index of "/opt/app/assets/" is forbidden, client: 172.18.0.1, server: , request: "GET / HTTP/1.1", host: "localhost:10080"
-2020/05/21 05:33:52 [error] 8#8: *4 directory index of "/opt/app/assets/" is forbidden, client: 172.18.0.1, server: , request: "GET / HTTP/1.1", host: "localhost:10080"

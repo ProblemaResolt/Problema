@@ -20,7 +20,6 @@ ENV PATH=./node_modules/.bin:$PATH \
 # Install Hex+Rebar
 RUN mix local.hex --force && \
     mix local.rebar --force && \
-    wget https://github.com/phoenixframework/archives/raw/master/phx_new.ez && \
-    mix archive.install ./phx_new.ez --force
+    mix archive.install https://github.com/phoenixframework/archives/raw/master/phx_new.ez --force
 
 WORKDIR /opt/app
