@@ -3,6 +3,8 @@
 /db
 /deps
 /*.ez
+/logs
+/.idea
 
 # Generated on crash by the VM
 erl_crash.dump
@@ -14,3 +16,6 @@ erl_crash.dump
 # secrets files as long as you replace their contents by environment
 # variables.
 /config/*.secret.exs
+assets/node_modules/
+.ash_history
+assets/elm-stuff/
