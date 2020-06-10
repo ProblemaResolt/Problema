@@ -3,7 +3,6 @@
 /db
 /deps
 /*.ez
-/logs
 /.idea
 
 # Generated on crash by the VM
@@ -19,3 +18,5 @@ erl_crash.dump
 assets/node_modules/
 .ash_history
 assets/elm-stuff/
+logs/access.log
+logs/error.log
