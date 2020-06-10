@@ -1,21 +1,42 @@
-module Main exposing (main)
-
-import Html exposing (..)
-import Html.Attributes exposing (..)
+module Main exposing (..)
+import Browser
+import Html exposing (Html, button, div, text)
+import Html.Events exposing (onClick)
 
 
 main =
-    section [ class "container" ]
-    [ h1 [] [ text "My Grocery List" ]
-    , ul []
-        [ li [] [ text "Black Beans" ]
-        , li [] [ text "Limes" ]
-        , li [] [ text "Greek Yogurt" ]
-        , li [] [ text "Cilantro" ]
-        , li [] [ text "Honey" ]
-        , li [] [ text "Sweet Potatoes" ]
-        , li [] [ text "Cumin" ]
-        , li [] [ text "Chili Powder" ]
-        , li [] [ text "Quinoa" ]
-        ]
+  Browser.sandbox { init = init, update = update, view = view }
+
+
+-- MODEL
+
+type alias Model = Int
+
+init : Model
+init =
+  0
+
+
+-- UPDATE
+
+type Msg = Increment | Decrement
+
+update : Msg -> Model -> Model
+update msg model =
+  case msg of
+    Increment ->
+      model + 1
+
+    Decrement ->
+      model - 1
+
+
+-- VIEW
+
+view : Model -> Html Msg
+view model =
+  div []
+    [ button [ onClick Decrement ] [ text "-" ]
+    , div [] [ text (String.fromInt model) ]
+    , button [ onClick Increment ] [ text "+" ]
     ]

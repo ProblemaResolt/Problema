@@ -1,6 +1,4 @@
-import {
-    Elm
-} from './Main.elm'
+import { Elm } from './Main.elm'
 import './sass/main.scss'
 
 Elm.Main.init({
