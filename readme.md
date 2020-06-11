@@ -50,7 +50,7 @@ config :api, Api.Repo,
   username: "postgres",
   password: "postgres",
   database: "api_dev",
-  hostname: "postgres",
+  hostname: "db",
   pool_size: 10
 [中略]
 ```
@@ -63,12 +63,14 @@ DB情報を更新
 ちょっとまって...
 
 ## Elm 構築
+内部に入る
+`docker-compose exec assets sh`
 
-`docker-compose exec app sh`
-/opt/app/assets # elm reactor
-すると
-Go to http://localhost:8000 to see your project dashboard.
-ダッシュボードが http://localhost:8000 に表示されます。
+`/opt/app/assets # yarn install`
+
+`/opt/app/assets # yarn dev`
+
+ http://localhost:8000 に表示されます。
 
 
 参考資料
@@ -83,3 +85,6 @@ https://qiita.com/tuchiro/items/4ccba7e210c596c383af#%E6%9C%AC%E7%95%AA%E7%92%B0
 
 Elm公式
 https://guide.elm-lang.jp/
+
+Elm hot reload Example
+You can find an example project at [elm-hot-loader-starter(https://github.com/simonh1000/elm-webpack-starter)] .
