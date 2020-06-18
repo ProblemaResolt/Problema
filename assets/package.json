@@ -25,7 +25,11 @@
         "closure-webpack-plugin": "^2.3.0",
         "copy-webpack-plugin": "^5.1.1",
         "css-loader": "^3.5.3",
+<<<<<<< HEAD
         "elm": "^0.19.1-3",
+=======
+        "elm": "^0.19.1-2",
+>>>>>>> 0d3729351ccbb117f4c46839362a7122c071520d
         "elm-analyse": "^0.16.5",
         "elm-hot-webpack-loader": "^1.1.6",
         "elm-test": "^0.19.1-1",
@@ -46,8 +50,12 @@
         "webpack-merge": "^4.2.2"
     },
     "dependencies": {
+<<<<<<< HEAD
         "mini.css": "^3.0.1",
         "sass": "^1.26.8"
+=======
+        "purecss": "^1.0.1"
+>>>>>>> 0d3729351ccbb117f4c46839362a7122c071520d
     },
     "prettier": {
         "tabWidth": 4

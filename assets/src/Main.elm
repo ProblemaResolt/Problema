@@ -15,6 +15,12 @@ import Json.Decode as Decode
 
 port toJs : String -> Cmd msg
 
+-- ---------------------------
+-- PORTS
+-- ---------------------------
+
+
+port toJs : String -> Cmd msg
 
 
 -- ---------------------------
@@ -68,6 +74,7 @@ update message model =
             case res of
                 Ok r ->
                     ( { model | serverMessage = r }, Cmd.none )
+<<<<<<< HEAD
 
                 Err err ->
                     ( { model | serverMessage = "Error: " ++ httpErrorToString err }, Cmd.none )
@@ -85,6 +92,25 @@ httpErrorToString err =
         NetworkError ->
             "NetworkError"
 
+=======
+
+                Err err ->
+                    ( { model | serverMessage = "Error: " ++ httpErrorToString err }, Cmd.none )
+
+
+httpErrorToString : Http.Error -> String
+httpErrorToString err =
+    case err of
+        BadUrl url ->
+            "BadUrl: " ++ url
+
+        Timeout ->
+            "Timeout"
+
+        NetworkError ->
+            "NetworkError"
+
+>>>>>>> 0d3729351ccbb117f4c46839362a7122c071520d
         BadStatus _ ->
             "BadStatus"
 
@@ -110,6 +136,7 @@ add1 model =
 
 view : Model -> Html Msg
 view model =
+<<<<<<< HEAD
     article [ class "container" ]
         [ header [ class "row"]
             [ -- img [ src "/images/logo.png" ] []
@@ -121,14 +148,34 @@ view model =
             [ p [ class "col-sm-2" ]
                 [ button
                     [ class "primary"
+=======
+    div [ class "container" ]
+        [ header []
+            [ -- img [ src "/images/logo.png" ] []
+              span [ class "logo" ] []
+            , h1 [] [ text "Elm 0.19.1 Webpack Starter, with hot-reloading" ]
+            ]
+        , p [] [ text "Click on the button below to increment the state." ]
+        , div [ class "pure-g" ]
+            [ div [ class "pure-u-1-3" ]
+                [ button
+                    [ class "pure-button pure-button-primary"
+>>>>>>> 0d3729351ccbb117f4c46839362a7122c071520d
                     , onClick Inc
                     ]
                     [ text "+ 1" ]
                 , text <| String.fromInt model.counter
                 ]
+<<<<<<< HEAD
             , div [ class "col-sm-10" ]
                 [ button
                     [ class "primary"
+=======
+            , div [ class "pure-u-1-3" ] []
+            , div [ class "pure-u-1-3" ]
+                [ button
+                    [ class "pure-button pure-button-primary"
+>>>>>>> 0d3729351ccbb117f4c46839362a7122c071520d
                     , onClick TestServer
                     ]
                     [ text "ping dev server" ]
@@ -140,10 +187,13 @@ view model =
             [ text "And ADD now don't forget to add a star to the Github repo "
             , a [ href "https://github.com/simonh1000/elm-webpack-starter" ] [ text "elm-webpack-starter" ]
             ]
+<<<<<<< HEAD
         ,footer[ class "sticky"]
             [
              p [] [ text "Ploblema Resolt" ]
             ]
+=======
+>>>>>>> 0d3729351ccbb117f4c46839362a7122c071520d
         ]
 
 
@@ -160,7 +210,11 @@ main =
         , update = update
         , view =
             \m ->
+<<<<<<< HEAD
                 { title = "Elm 0.19 starter 001"
+=======
+                { title = "Elm 0.19 starter"
+>>>>>>> 0d3729351ccbb117f4c46839362a7122c071520d
                 , body = [ view m ]
                 }
         , subscriptions = \_ -> Sub.none
